@@ -1,16 +1,28 @@
 import { useState } from 'react'
 import { FiLink } from 'react-icons/fi'
 import './home.css'
-
 import Menu from '../../components/Menu'
 import LinkItem from '../../components/LinkItem'
+import api from '../../services/api'
 
 export default function Home() {
     const [link, setLink] = useState('')
+    const [data, setData] = useState('')
     const [showModal, setShowModal] = useState(false)
 
-    function handleShortLink(){
-        setShowModal(true)
+    async function handleShortLink(){
+        try{
+            const response = await api.post('/shorten', {
+                long_url: link
+            })
+
+            setData(response.data)
+            setShowModal(true)
+            setLink('')
+        } catch {
+            alert('Algo deu errado, tente novamente!')
+            setLink('')
+        }
     }
 
     return(
@@ -38,6 +50,7 @@ export default function Home() {
             {showModal && (
                 <LinkItem
                     closeModal={ () => setShowModal(false) }
+                    contentUrl={data}
                 />
             )}
         </div>
