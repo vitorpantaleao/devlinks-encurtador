@@ -16,10 +16,22 @@
     align-items: center;
 }
 
+.social:hover {
+    opacity: .7;
+}
+
 .menu-item {
     color: #000;
     background-color: #FFF;
     padding: 12px 24px;
     border-radius: 4px;
     margin-right: 14px;
+    border: 1px solid #FFF;
+    transition: background .5s;
+}
+
+.menu-item:hover {
+    background: transparent;
+    border: 1px solid #FFF;
+    color: #FFF;
 }
